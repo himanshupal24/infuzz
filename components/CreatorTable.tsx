@@ -2,34 +2,8 @@
 import { useState } from 'react';
 import { getBadgeStyle, formatFollowers } from '@/lib/analytics';
 import { Trash2, CheckCircle, XCircle, Eye, X, Instagram, Youtube, MessageCircle, Globe, TrendingUp, DollarSign, Users, Calendar, Gem } from 'lucide-react';
+import { Creator } from '@/lib/types';
 
-interface Creator {
-  _id: string;
-  name: string;
-  email: string;
-  niche: string;
-  country: string;
-  followers: number;
-  avgLikes: number;
-  avgComments: number;
-  postsPerMonth: number;
-  engagementRate: number;
-  creatorScore: number;
-  badge: string;
-  instagram?: string;
-  youtube?: string;
-  tiktok?: string;
-  whatsapp?: string;
-  pricePost?: number;
-  priceStory?: number;
-  priceYoutube?: number;
-  contentType?: string[];
-  audienceCountry?: string;
-  audienceAge?: string;
-  audienceGender?: string;
-  status: string;
-  createdAt: string;
-}
 
 interface CreatorTableProps {
   creators: Creator[];

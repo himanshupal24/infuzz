@@ -2,17 +2,8 @@
 import { useEffect, useState } from 'react';
 import { formatFollowers, getBadgeStyle } from '@/lib/analytics';
 import { Trophy, TrendingUp } from 'lucide-react';
+import { Creator } from '@/lib/types';
 
-interface Creator {
-  _id: string;
-  name: string;
-  niche: string;
-  country: string;
-  followers: number;
-  engagementRate: number;
-  creatorScore: number;
-  badge: string;
-}
 
 export default function Leaderboard() {
   const [creators, setCreators] = useState<Creator[]>([]);
@@ -63,11 +54,10 @@ export default function Leaderboard() {
             return (
               <div
                 key={creator._id}
-                className={`flex items-center gap-4 rounded-xl px-4 py-3 border transition-all duration-300 hover:scale-[1.01] ${
-                  isTop3
+                className={`flex items-center gap-4 rounded-xl px-4 py-3 border transition-all duration-300 hover:scale-[1.01] ${isTop3
                     ? 'bg-gradient-to-r from-[#7C3AED]/10 to-transparent border-[#7C3AED]/20'
                     : 'bg-[#0F0F1A] border-[#1E1E2E]'
-                }`}
+                  }`}
                 style={{ animationDelay: `${i * 0.08}s` }}
               >
                 {/* Rank */}

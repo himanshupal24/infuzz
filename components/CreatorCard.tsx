@@ -1,20 +1,7 @@
 import { formatFollowers, getBadgeStyle } from '@/lib/analytics';
 import { Instagram, Youtube, TrendingUp } from 'lucide-react';
+import { Creator } from '@/lib/types';
 
-interface Creator {
-  _id?: string;
-  name: string;
-  niche: string;
-  followers: number;
-  engagementRate: number;
-  creatorScore: number;
-  badge: string;
-  instagram?: string;
-  youtube?: string;
-  tiktok?: string;
-  country?: string;
-  status?: string;
-}
 
 interface CreatorCardProps {
   creator: Creator;

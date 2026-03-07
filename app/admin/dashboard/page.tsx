@@ -7,23 +7,7 @@ import CreatorTable from '@/components/CreatorTable';
 import { Zap, LogOut, Search, Filter, Loader2, Gem, Target, RefreshCw, ChevronDown, X } from 'lucide-react';
 import { formatFollowers, getBadgeStyle } from '@/lib/analytics';
 
-interface Creator {
-  _id: string;
-  name: string;
-  email: string;
-  niche: string;
-  country: string;
-  followers: number;
-  engagementRate: number;
-  creatorScore: number;
-  badge: string;
-  instagram?: string;
-  youtube?: string;
-  tiktok?: string;
-  pricePost?: number;
-  status: string;
-  createdAt: string;
-}
+import { Creator } from '@/lib/types';
 
 interface Stats {
   total: number;
@@ -79,7 +63,7 @@ export default function AdminDashboard() {
       if (res.status === 401) { router.push('/admin/login'); return; }
       const data = await res.json();
       if (data.success) setStats(data.stats);
-    } catch {}
+    } catch { }
   };
 
   const fetchCreators = useCallback(async (t: string, activeTab: TabType) => {
@@ -95,7 +79,7 @@ export default function AdminDashboard() {
       if (res.status === 401) { router.push('/admin/login'); return; }
       const data = await res.json();
       setCreators(data.creators || []);
-    } catch {} finally {
+    } catch { } finally {
       setLoading(false);
     }
   }, [router]);
@@ -116,7 +100,7 @@ export default function AdminDashboard() {
         setCreators((prev) => prev.map((c) => c._id === id ? { ...c, status } : c));
         fetchStats(token);
       }
-    } catch {}
+    } catch { }
   };
 
   const deleteCreator = async (id: string) => {
@@ -130,7 +114,7 @@ export default function AdminDashboard() {
         setCreators((prev) => prev.filter((c) => c._id !== id));
         fetchStats(token);
       }
-    } catch {}
+    } catch { }
   };
 
   const runMatcher = async () => {
@@ -147,7 +131,7 @@ export default function AdminDashboard() {
       const res = await fetch(`/api/creators?${params}`, { headers: authHeaders(token) });
       const data = await res.json();
       setMatchResults(data.creators || []);
-    } catch {} finally {
+    } catch { } finally {
       setMatchLoading(false);
     }
   };
@@ -216,11 +200,10 @@ export default function AdminDashboard() {
             <button
               key={t.id}
               onClick={() => handleTabChange(t.id)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                tab === t.id
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${tab === t.id
                   ? 'bg-[#7C3AED] text-white'
                   : 'bg-[#0F0F1A] border border-[#1E1E2E] text-gray-500 hover:text-white hover:border-[#7C3AED]/50'
-              }`}
+                }`}
             >
               {t.label}
               {t.count !== undefined && (

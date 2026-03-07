@@ -6,33 +6,8 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { getBadgeStyle, formatFollowers, getScoreColor } from '@/lib/analytics';
 import { Instagram, Youtube, Search, Loader2, AlertCircle, TrendingUp, Gem, ExternalLink, Zap } from 'lucide-react';
+import { Creator } from '@/lib/types';
 
-interface Creator {
-  _id: string;
-  name: string;
-  email: string;
-  country: string;
-  niche: string;
-  followers: number;
-  avgLikes: number;
-  avgComments: number;
-  postsPerMonth: number;
-  instagram?: string;
-  youtube?: string;
-  tiktok?: string;
-  engagementRate: number;
-  creatorScore: number;
-  badge: string;
-  status: string;
-  pricePost?: number;
-  priceStory?: number;
-  priceYoutube?: number;
-  contentType?: string[];
-  audienceCountry?: string;
-  audienceAge?: string;
-  audienceGender?: string;
-  createdAt: string;
-}
 
 function ScoreRing({ score }: { score: number }) {
   const radius = 54;
@@ -289,14 +264,14 @@ function DashboardContent() {
                     📱 @{creator.tiktok}
                   </div>
                 )}
-                {(creator as any).whatsapp && (
+                {creator.whatsapp && (
                   <a
-                    href={`https://wa.me/${(creator as any).whatsapp.replace(/\D/g, '')}`}
+                    href={`https://wa.me/${creator.whatsapp.replace(/\D/g, '')}`}
                     target="_blank"
                     rel="noreferrer"
                     className="flex items-center gap-2 px-4 py-2 rounded-lg bg-green-500/10 border border-green-500/20 text-green-400 text-sm hover:bg-green-500/20 transition-colors"
                   >
-                    💬 +{(creator as any).whatsapp}
+                    💬 +{creator.whatsapp}
                   </a>
                 )}
               </div>
